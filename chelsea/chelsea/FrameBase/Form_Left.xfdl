@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="Form_Left" width="200" height="720" titletext="Form_Left">
+    <Layouts>
+      <Layout width="200" height="720" screenid="Desktop_screen">
+        <Button id="btn_main" taborder="0" text="회원 목록" left="36" top="264" width="134" height="36" onclick="btn_main_onclick"/>
+        <Button id="btn_productInsert" taborder="1" text="상품 등록" left="36" top="332" width="134" height="36" onclick="btn_productInsert_onclick"/>
+        <Button id="btn_product" taborder="2" text="상품 목록" left="36" top="402" width="134" height="36" onclick="btn_product_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.btn_main_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	nexacro.getApplication().mainframe.HFrameSet00.WorkFrame.set_formurl("Base::customer.xfdl");
+};
+
+this.btn_product_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	nexacro.getApplication().mainframe.HFrameSet00.WorkFrame.set_formurl("Base::productList.xfdl");
+};
+
+this.btn_productInsert_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	nexacro.getApplication().mainframe.HFrameSet00.WorkFrame.set_formurl("Base::productInsert.xfdl");
+};
+]]></Script>
+  </Form>
+</FDL>

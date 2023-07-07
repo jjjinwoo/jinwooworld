@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="buyDetail" width="1280" height="720" titletext="New Form" onload="buyDetail_onload">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Static id="main_title" taborder="0" text="구매 정보" left="500" top="28" width="210" height="66" color="black" font="bold 24pt/normal &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00" taborder="1" text="주문번호" left="30" top="116" width="90" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00_00" taborder="2" text="Phone" left="29" top="189" width="78" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00_01" taborder="3" text="userID" left="30" top="147" width="77" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00_02" taborder="4" text="주문자 연락처" left="26" top="262" width="144" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00_03" taborder="5" text="최종 결제 금액" left="25" top="301" width="150" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00_04" taborder="6" text="주문자" left="26" top="225" width="74" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00_05" taborder="7" text="우편번호" left="603" top="112" width="87" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00_06" taborder="8" text="요청 사항" left="602" top="260" width="98" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00_08" taborder="9" text="결제 수단" left="601" top="222" width="104" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00_09" taborder="10" text="상세 주소" left="600" top="183" width="94" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00_10" taborder="11" text="주소" left="636" top="149" width="54" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Edit id="writer" taborder="12" left="172" top="122" width="339" height="25" enable="false"/>
+        <Edit id="writer00" taborder="13" left="172" top="158" width="339" height="25" enable="false"/>
+        <Edit id="writer00_00" taborder="14" left="172" top="195" width="339" height="25" enable="false"/>
+        <Edit id="writer00_00_00" taborder="15" left="172" top="234" width="339" height="25" enable="false"/>
+        <Edit id="writer00_00_00_00" taborder="16" left="172" top="272" width="339" height="25" enable="false"/>
+        <Edit id="writer00_00_00_00_00" taborder="17" left="172" top="310" width="339" height="25" enable="false"/>
+        <Edit id="writer01" taborder="18" left="711" top="120" width="339" height="25" enable="false"/>
+        <Edit id="writer01_00" taborder="19" left="712" top="157" width="339" height="25" enable="false"/>
+        <Edit id="writer01_00_00" taborder="20" left="713" top="195" width="339" height="25" enable="false"/>
+        <Edit id="writer01_00_00_00" taborder="21" left="713" top="233" width="339" height="25" enable="false"/>
+        <TextArea id="TextArea00" taborder="22" left="715" top="271" width="336" height="68" enable="false"/>
+        <Grid id="Grid00" taborder="23" left="36" top="376" width="1020" height="249" binddataset="orderProductVO">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="148"/>
+                <Column size="250"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="106"/>
+                <Column size="99"/>
+                <Column size="93"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="상품번호"/>
+                <Cell col="1" text="주문번호"/>
+                <Cell col="2" text="userID"/>
+                <Cell col="3" text="상품명"/>
+                <Cell col="4" text="사이즈 "/>
+                <Cell col="5" text="수량"/>
+                <Cell col="6" text="가격"/>
+                <Cell col="7" text="주문 일자"/>
+                <Cell col="8" text="배송 상태"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:orderProduct_num"/>
+                <Cell col="1" text="bind:order_num"/>
+                <Cell col="2" text="bind:userID"/>
+                <Cell col="3" text="bind:product_name"/>
+                <Cell col="4" text="bind:product_size"/>
+                <Cell col="5" text="bind:quantity"/>
+                <Cell col="6" text="bind:product_price"/>
+                <Cell col="7" text="bind:order_date"/>
+                <Cell col="8" text="bind:order_state" combodataset="Dataset00" combodatacol="order_state" combocodecol="order_state" edittype="combo"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="Button00" taborder="24" text="update" left="958" top="644" width="100" height="38" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="orderVO">
+        <ColumnInfo>
+          <Column id="order_num" type="INT" size="256"/>
+          <Column id="userID" type="STRING" size="256"/>
+          <Column id="phone" type="STRING" size="256"/>
+          <Column id="order_phone" type="STRING" size="256"/>
+          <Column id="order_name" type="STRING" size="256"/>
+          <Column id="order_address1" type="STRING" size="256"/>
+          <Column id="order_address2" type="STRING" size="256"/>
+          <Column id="postnum" type="STRING" size="256"/>
+          <Column id="order_memo" type="STRING" size="256"/>
+          <Column id="paymethod" type="STRING" size="256"/>
+          <Column id="totalbill" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="orderProductVO">
+        <ColumnInfo>
+          <Column id="orderProduct_num" type="INT" size="256"/>
+          <Column id="order_num" type="INT" size="256"/>
+          <Column id="userID" type="STRING" size="256"/>
+          <Column id="product_code" type="INT" size="256"/>
+          <Column id="product_size" type="STRING" size="256"/>
+          <Column id="quantity" type="INT" size="256"/>
+          <Column id="product_name" type="STRING" size="256"/>
+          <Column id="product_price" type="INT" size="256"/>
+          <Column id="delivery" type="STRING" size="256"/>
+          <Column id="order_date" type="DATE" size="256"/>
+          <Column id="order_state" type="STRING" size="256"/>
+          <Column id="buyComplete" type="STRING" size="256"/>
+          <Column id="refund" type="STRING" size="256"/>
+          <Column id="phone" type="STRING" size="256"/>
+          <Column id="images2" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="Dataset00">
+        <ColumnInfo>
+          <Column id="order_state" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="order_state">배송 준비중</Col>
+          </Row>
+          <Row>
+            <Col id="order_state">배송 중</Col>
+          </Row>
+          <Row>
+            <Col id="order_state">배송 완료</Col>
+          </Row>
+          <Row>
+            <Col id="order_state">환불 완료</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="writer" propid="value" datasetid="orderVO" columnid="order_num"/>
+      <BindItem id="item1" compid="writer00" propid="value" datasetid="orderVO" columnid="userID"/>
+      <BindItem id="item2" compid="writer00_00" propid="value" datasetid="orderVO" columnid="phone"/>
+      <BindItem id="item3" compid="writer00_00_00" propid="value" datasetid="orderVO" columnid="order_name"/>
+      <BindItem id="item4" compid="writer00_00_00_00" propid="value" datasetid="orderVO" columnid="order_phone"/>
+      <BindItem id="item5" compid="writer00_00_00_00_00" propid="value" datasetid="orderVO" columnid="totalbill"/>
+      <BindItem id="item6" compid="writer01" propid="value" datasetid="orderVO" columnid="postnum"/>
+      <BindItem id="item7" compid="writer01_00" propid="value" datasetid="orderVO" columnid="order_address1"/>
+      <BindItem id="item8" compid="writer01_00_00" propid="value" datasetid="orderVO" columnid="order_address2"/>
+      <BindItem id="item9" compid="writer01_00_00_00" propid="value" datasetid="orderVO" columnid="paymethod"/>
+      <BindItem id="item10" compid="TextArea00" propid="value" datasetid="orderVO" columnid="order_memo"/>
+    </Bind>
+    <Script type="xscript5.1"><![CDATA[
+this.buyDetail_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.order_num = nexacro.getApplication().getVariable("gorderNum");
+    this.userID = nexacro.getApplication().getVariable("guserID");
+    this.orderProduct_num = nexacro.getApplication().getVariable("gorderProductNum");
+    
+	trace(this.order_num + "          " + this.userID + "          " +  this.orderProduct_num);
+	
+	this.orderProductVO.addRow();	
+	this.orderVO.addRow();	
+	this.svcURL = "datasvc::orderDetail.do?order_num=" + this.order_num + "&userID=" + this.userID + "&orderProduct_num=" + this.orderProduct_num;
+	this.inDS = "orderProductVO=orderProductVO orderVO=orderVO";
+	this.outDS = "orderProductVO=orderProductVO orderVO=orderVO";
+	this.transaction("read", this.svcURL, this.inDS, this.outDS, "", "");
+	
+};
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{	
+	this.svcURL = "datasvc::updateState.do";
+	this.inDS = "orderProductVO=orderProductVO orderVO=orderVO";
+	this.outDS = "orderProductVO=orderProductVO orderVO=orderVO";
+	this.transaction("update", this.svcURL, this.inDS, this.outDS, "", "callback");
+};
+
+this.callback = function(svcid, errcode, errmsg, responseData) 
+{
+	if (svcid == "update") {
+        alert("성공했습니다.");
+		nexacro.getApplication().mainframe.HFrameSet00.WorkFrame.set_formurl("Base::buyList.xfdl");
+    } else {
+        alert("실패했습니다.");
+    }
+}]]></Script>
+  </Form>
+</FDL>

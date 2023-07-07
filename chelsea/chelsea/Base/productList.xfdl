@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="productList" width="1280" height="720" titletext="New Form" onload="productList_onload">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Static id="s_count" taborder="0" left="908" top="55" width="78" height="50" font="14pt/normal &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00" taborder="1" text="총" left="860" top="62" width="66" height="36" color="black" font="14pt/normal &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="main_title" taborder="2" text="상품 목록" left="500" top="28" width="210" height="66" color="black" font="bold 24pt/normal &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Grid id="Grid00" taborder="3" left="37" top="158" width="1057" height="205" binddataset="productVO" oncellclick="Grid00_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="97"/>
+                <Column size="300"/>
+                <Column size="185"/>
+                <Column size="151"/>
+                <Column size="117"/>
+                <Column size="124"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="제품 코드"/>
+                <Cell col="1" text="제품 유형"/>
+                <Cell col="2" text="제품명"/>
+                <Cell col="3" text="가격"/>
+                <Cell col="4" text="등록일자"/>
+                <Cell col="5" text="메인 이미지"/>
+                <Cell col="6" text="상세 이미지"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:product_code"/>
+                <Cell col="1" text="bind:product_type"/>
+                <Cell col="2" text="bind:product_name"/>
+                <Cell col="3" text="bind:product_price"/>
+                <Cell col="4" text="bind:product_date"/>
+                <Cell col="5" text="bind:images2"/>
+                <Cell col="6" text="bind:images1"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="div_page" taborder="4" left="67" top="441" width="985" height="99">
+          <Layouts>
+            <Layout>
+              <Static id="stc_No1" taborder="0" text="1" left="272" top="58" width="52" height="34" font="bold 18px/normal &quot;Malgun Gothic&quot;,&quot;맑은 고딕&quot;" color="black" onclick="div_page_stc_No_onclick"/>
+              <Static id="stc_No2" taborder="1" text="2" left="312" top="58" width="52" height="34" font="bold 18px/normal &quot;Malgun Gothic&quot;,&quot;맑은 고딕&quot;" color="black" onclick="div_page_stc_No_onclick"/>
+              <Static id="stc_No3" taborder="2" text="3" left="360" top="58" width="52" height="34" font="bold 18px/normal &quot;Malgun Gothic&quot;,&quot;맑은 고딕&quot;" color="black" onclick="div_page_stc_No_onclick"/>
+              <Static id="stc_No4" taborder="3" text="4" left="398" top="58" width="52" height="34" font="bold 18px/normal &quot;Malgun Gothic&quot;,&quot;맑은 고딕&quot;" color="black" onclick="div_page_stc_No_onclick"/>
+              <Static id="stc_No5" taborder="4" text="5" left="438" top="58" width="52" height="34" font="bold 18px/normal &quot;Malgun Gothic&quot;,&quot;맑은 고딕&quot;" color="black" onclick="div_page_stc_No_onclick"/>
+              <Static id="stc_No6" taborder="5" text="6" left="478" top="58" width="52" height="34" font="bold 18px/normal &quot;Malgun Gothic&quot;,&quot;맑은 고딕&quot;" color="black" onclick="div_page_stc_No_onclick"/>
+              <Static id="stc_No7" taborder="6" text="7" left="518" top="58" width="52" height="34" font="bold 18px/normal &quot;Malgun Gothic&quot;,&quot;맑은 고딕&quot;" color="black" onclick="div_page_stc_No_onclick"/>
+              <Static id="stc_No8" taborder="7" text="8" left="558" top="58" width="52" height="34" font="bold 18px/normal &quot;Malgun Gothic&quot;,&quot;맑은 고딕&quot;" color="black" onclick="div_page_stc_No_onclick"/>
+              <Static id="stc_No9" taborder="8" text="9" left="608" top="58" width="52" height="34" font="bold 18px/normal &quot;Malgun Gothic&quot;,&quot;맑은 고딕&quot;" color="black" onclick="div_page_stc_No_onclick"/>
+              <Static id="stc_No10" taborder="9" text="10" left="648" top="58" width="52" height="34" font="bold 18px/normal &quot;Malgun Gothic&quot;,&quot;맑은 고딕&quot;" color="black" onclick="div_page_stc_No_onclick"/>
+              <Static id="stc_First" taborder="10" text="처음" left="148" top="58" width="52" height="34" font="18pt/normal &quot;Arial&quot;,&quot;HY나무M&quot;" onclick="div_page_stc_First_onclick"/>
+              <Static id="stc_Prev" taborder="11" text="이전" left="203" top="58" width="52" height="34" font="18pt/normal &quot;Arial&quot;,&quot;HY나무M&quot;" onclick="div_page_stc_Prev_onclick"/>
+              <Static id="stc_Next" taborder="12" text="다음" left="713" top="58" width="52" height="34" font="18pt/normal &quot;Arial&quot;,&quot;HY나무M&quot;" onclick="div_page_stc_Next_onclick"/>
+              <Static id="stc_Last" taborder="13" text="끝" left="778" top="58" width="52" height="34" font="18pt/normal &quot;Arial&quot;,&quot;HY나무M&quot;" onclick="div_page_stc_Last_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_search" taborder="5" text="검색" left="763" top="395" width="80" height="28" font="18pt/normal &quot;Arial&quot;,&quot;HY나무M&quot;" onclick="btn_search_onclick"/>
+        <Edit id="keyWord" taborder="6" left="373" top="396" width="370" height="29"/>
+        <Combo id="keyField" taborder="7" text="상품명" left="210" top="395" width="135" height="39" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" index="0" value="product_name" font="18pt/normal &quot;Arial&quot;,&quot;HY나무M&quot;">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">product_name</Col>
+                <Col id="datacolumn">상품명</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">product_type</Col>
+                <Col id="datacolumn">제품 유형</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Static id="currPageNum" taborder="8" left="514" top="540" width="52" height="34" opacity="15%"/>
+        <Button id="Button00" taborder="9" text="상품 등록" left="886" top="395" width="94" height="31" font="15pt/normal &quot;Arial&quot;,&quot;HY나무M&quot;" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="test">
+        <ColumnInfo>
+          <Column id="pageNum" type="STRING" size="256"/>
+          <Column id="contentPerPage" type="STRING" size="256"/>
+          <Column id="pageSize" type="STRING" size="256"/>
+          <Column id="startPage" type="STRING" size="256"/>
+          <Column id="endPage" type="STRING" size="256"/>
+          <Column id="count" type="STRING" size="256"/>
+          <Column id="totalPage" type="STRING" size="256"/>
+          <Column id="startCount" type="STRING" size="256"/>
+          <Column id="endCount" type="STRING" size="256"/>
+          <Column id="keyField" type="STRING" size="256"/>
+          <Column id="keyWord" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="productVO">
+        <ColumnInfo>
+          <Column id="product_code" type="INT" size="256"/>
+          <Column id="product_type" type="STRING" size="256"/>
+          <Column id="product_name" type="STRING" size="256"/>
+          <Column id="product_price" type="INT" size="256"/>
+          <Column id="deleteState" type="STRING" size="256"/>
+          <Column id="product_date" type="DATE" size="256"/>
+          <Column id="images1" type="STRING" size="256"/>
+          <Column id="images2" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.1"><![CDATA[this.pageNum = 1;
+this.pageSize = 5;
+this.contentPerPage = 10;
+this.count = 0;
+this.productList_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.test.addRow();
+	this.test.setColumn(0,"pageNum",this.pageNum);
+    this.test.setColumn(0,"contentPerPage",this.contentPerPage);
+    this.test.setColumn(0,"pageSize",this.pageSize);
+	
+	this.svcURL = "datasvc::goodsList.do";
+    this.outDS = "test=test";
+    this.inDS = "productVO=productVO test=test";
+    this.transaction("save", this.svcURL, this.outDS, this.inDS, "", "list_c");
+    
+    this.currPageNum.set_text(this.pageNum); 
+};
+
+this.list_c = function(obj:nexacro.Form,e:nexacro.LoadEventInfo) 
+{
+
+	// 총 게시글 건수
+	this.s_count.set_text(this.test.getColumn(0,"count"));
+	
+	this.pageNo = 0;
+	
+	//페이지 번호 나열
+    for(var i= this.test.getColumn(0,"startPage"); i<= this.test.getColumn(0,"endPage"); i++){
+        this.pageNo = this.pageNo +1;
+        var component = this.div_page.form["stc_No" + this.pageNo];
+        component.set_visible(true);
+        component.set_text(i);		
+    }
+	
+	
+	// 없는 페이지 처리
+	for (var i = 1; i <= 10; i++) {
+		var component = this.div_page.form["stc_No" + i];
+		if (i > this.pageNo) {
+			component.set_visible(false);
+		} else {
+			component.set_visible(true);
+			if (this.test.getColumn(0, "pageNum") != i) {
+				component.set_color("black");
+			} else {
+				component.set_color("red");
+			}
+		}
+	}
+	
+	
+	// 다음  버튼 처리
+    if(this.test.getColumn(0,"totalPage")-this.test.getColumn(0,"startPage") < this.test.getColumn(0,"contentPerPage")){
+        this.div_page.form.stc_Next.set_visible(false);
+    }else{this.div_page.form.stc_Next.set_visible(true);}
+
+    // 이전 버튼 처리
+    if (this.test.getColumn(0,"pageNum") <= this.test.getColumn(0,"contentPerPage")) {
+        this.div_page.form.stc_Prev.set_visible(false);
+    }else{this.div_page.form.stc_Prev.set_visible(true);}
+	
+    //this.pageNo = 0;
+	
+    
+}
+
+//페이지 이동 버튼 이벤트
+
+this.div_page_stc_No_onclick= function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	this.iNo= new Number(obj.text);
+	//obj.set_color("red");
+    this.test.setColumn(0,"pageNum",this.iNo);
+    this.svcURL = "datasvc::goodsList.do";
+    this.outDS = "test=test";	
+	this.inDS = "productVO=productVO test=test";
+	this.transaction("save", this.svcURL, this.outDS, this.inDS, "", "list_c");	
+	
+	// 현재 페이지 색상 변경
+    for (var i = 1; i <= this.pageNo; i++) {
+        var component = this.div_page.form["stc_No" + i];
+        if (component.text == obj.text) {
+            component.set_color("red");
+        } else {
+            component.set_color("black");
+        }
+    }
+}
+
+// 처음
+this.div_page_stc_First_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	this.test.setColumn(0, "pageNum", 1);
+    this.svcURL = "datasvc::goodsList.do";
+    this.outDS = "test=test";
+    this.inDS = "productVO=productVO test=test";
+    this.transaction("first", this.svcURL, this.outDS, this.inDS, "", "list_c");
+
+};
+
+// 맨 끝
+this.div_page_stc_Last_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	this.test.setColumn(0, "pageNum", this.test.getColumn(0,"totalPage"));
+    this.svcURL = "datasvc::goodsList.do";
+    this.outDS = "test=test";
+    this.inDS = "productVO=productVO test=test";
+    this.transaction("last", this.svcURL, this.outDS, this.inDS, "", "list_c");
+};
+
+// 이전
+this.div_page_stc_Prev_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	this.test.setColumn(0,"pageNum",nexacro.toNumber(this.test.getColumn(0,"startPage"))-1);
+    this.svcURL = "datasvc::goodsList.do";
+    this.outDS = "test=test";	
+	this.inDS = "productVO=productVO test=test";
+	this.transaction("prev", this.svcURL, this.outDS, this.inDS, "", "list_c");	
+};
+
+// 다음
+this.div_page_stc_Next_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	this.test.setColumn(0,"pageNum", nexacro.toNumber(this.test.getColumn(0,"endPage"))+1);
+    this.svcURL = "datasvc::goodsList.do";
+    this.outDS = "test=test";	
+	this.inDS = "productVO=productVO test=test";
+	this.transaction("next", this.svcURL, this.outDS, this.inDS, "", "list_c");	
+};
+
+this.btn_search_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.keyfield = this.keyField.value;
+    this.keyword = this.keyWord.value;
+
+    alert("keyField : " + this.keyfield + " keyword : " + this.keyword);
+
+    //test.addColumn("keyField", "String");
+    //test.addColumn("keyWord", "String");
+    //test.addRow();
+    this.test.setColumn(0, "keyField", this.keyfield);
+    this.test.setColumn(0, "keyWord", this.keyword);
+    
+	trace("keyField : " + this.keyfield + " keyword : " + this.keyword);
+	
+    this.svcURL = "datasvc::goodsList.do";
+    this.outDS = "test=test";
+    this.inDS = "productVO=productVO test=test";
+    this.transaction("search", this.svcURL, this.outDS, this.inDS, "", "search_Back");
+};
+
+this.search_Back = function(obj:nexacro.Form,e:nexacro.LoadEventInfo) 
+{
+
+        alert("검색완료");
+        
+        // 검색 결과 개수
+        this.totalCount = this.test.getColumn(0, "count");
+        
+        // 페이지 당 게시글 수 
+        this.pageSize = 5;
+        
+        // 전체 페이지 수 계산
+        this.totalPage = Math.ceil(this.totalCount / this.pageSize);
+        
+        // 페이지 정보를 데이터셋에 저장 .setColumn(nRow,nColIdx,varVal)
+        this.test.setColumn(0, "totalPage", this.totalPage);
+        
+        // 페이지 번호에 맞는 데이터를 가져와서 화면에 표시
+        this.list_c();
+        
+        return;
+
+}
+
+this.Grid00_oncellclick = function(obj:nexacro.Grid,e:nexacro.GridClickEventInfo)
+{
+	var productCodeIndex = obj.getBindCellIndex("body", "product_code");
+    var product_code = obj.getCellText(e.row, productCodeIndex);
+	//alert(product_code);
+	nexacro.getApplication().setVariable("gproduct_code", product_code);
+	
+	nexacro.getApplication().mainframe.HFrameSet00.WorkFrame.set_formurl("Base::productDetail.xfdl");
+};
+
+// 상품 등록
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	nexacro.getApplication().mainframe.HFrameSet00.WorkFrame.set_formurl("Base::productInsert.xfdl");
+};
+]]></Script>
+  </Form>
+</FDL>

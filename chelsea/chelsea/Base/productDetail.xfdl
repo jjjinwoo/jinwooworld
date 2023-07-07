@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="productDetail" width="1280" height="720" titletext="New Form" onload="productDetail_onload">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Static id="main_title" taborder="0" text="제품 정보" left="500" top="28" width="210" height="66" color="black" font="bold 24pt/normal &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Edit id="writer" taborder="1" left="195" top="122" width="339" height="25" enable="false"/>
+        <Edit id="writer00" taborder="2" left="716" top="120" width="339" height="25" enable="false"/>
+        <Edit id="writer00_00" taborder="3" left="195" top="155" width="339" height="25" enable="false"/>
+        <Edit id="writer00_00_00" taborder="4" left="716" top="152" width="339" height="25" enable="false"/>
+        <Edit id="writer00_00_00_00" taborder="5" left="195" top="192" width="339" height="25" enable="false"/>
+        <Edit id="writer00_00_00_00_00" taborder="6" left="195" top="447" width="339" height="25" enable="false"/>
+        <Static id="Static00_03" taborder="7" text="상품 메인 이미지" left="30" top="181" width="157" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00_04" taborder="8" text="상품 가격" left="592" top="148" width="104" height="32" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00_00" taborder="9" text="상품명" left="31" top="145" width="78" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00_01" taborder="10" text="제품 타입" left="591" top="111" width="100" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00" taborder="11" text="제품 코드" left="30" top="116" width="90" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <Static id="Static00_03_00" taborder="12" text="상품 상세 이미지" left="30" top="438" width="157" height="42" color="black" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;"/>
+        <ImageViewer id="ImageViewer00" taborder="13" left="195" top="227" width="304" height="203"/>
+        <Grid id="Grid00" taborder="14" left="610" top="198" width="370" height="192" binddataset="productOptionVO">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="120"/>
+                <Column size="125"/>
+                <Column size="123"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="상품 코드"/>
+                <Cell col="1" text="사이즈"/>
+                <Cell col="2" text="수량"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:product_code"/>
+                <Cell col="1" text="bind:product_size"/>
+                <Cell col="2" text="bind:quantity"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <ImageViewer id="ImageViewer01" taborder="15" left="195" top="482" width="304" height="203"/>
+        <Button id="Button00" taborder="16" text="수정" left="616" top="441" width="108" height="41" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;" onclick="Button00_onclick"/>
+        <Button id="Button00_00" taborder="17" text="삭제" left="770" top="441" width="108" height="41" font="16pt &quot;Arial&quot;,&quot;HY나무M&quot;" onclick="Button00_00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="productVO">
+        <ColumnInfo>
+          <Column id="product_code" type="INT" size="256"/>
+          <Column id="product_type" type="STRING" size="256"/>
+          <Column id="product_name" type="STRING" size="256"/>
+          <Column id="product_price" type="INT" size="256"/>
+          <Column id="deleteState" type="STRING" size="256"/>
+          <Column id="product_date" type="DATE" size="256"/>
+          <Column id="images1" type="STRING" size="256"/>
+          <Column id="images2" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="productOptionVO">
+        <ColumnInfo>
+          <Column id="product_code" type="INT" size="256"/>
+          <Column id="product_size" type="STRING" size="256"/>
+          <Column id="quantity" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="writer" propid="value" datasetid="productVO" columnid="product_code"/>
+      <BindItem id="item1" compid="writer00" propid="value" datasetid="productVO" columnid="product_type"/>
+      <BindItem id="item2" compid="writer00_00" propid="value" datasetid="productVO" columnid="product_name"/>
+      <BindItem id="item3" compid="writer00_00_00" propid="value" datasetid="productVO" columnid="product_price"/>
+      <BindItem id="item4" compid="writer00_00_00_00" propid="value" datasetid="productVO" columnid="images2"/>
+      <BindItem id="item5" compid="writer00_00_00_00_00" propid="value" datasetid="productVO" columnid="images1"/>
+      <BindItem id="item6" compid="writer01" propid="value" datasetid="orderVO" columnid="postnum"/>
+      <BindItem id="item7" compid="writer01_00" propid="value" datasetid="orderVO" columnid="order_address1"/>
+      <BindItem id="item8" compid="writer01_00_00" propid="value" datasetid="orderVO" columnid="order_address2"/>
+      <BindItem id="item9" compid="writer01_00_00_00" propid="value" datasetid="orderVO" columnid="paymethod"/>
+    </Bind>
+    <Script type="xscript5.1"><![CDATA[
+this.productDetail_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	this.product_code = nexacro.getApplication().getVariable("gproduct_code");
+	
+	//alert(this.product_code);
+	
+	this.productVO.addRow();	
+	this.productOptionVO.addRow();	
+	this.svcURL = "datasvc::goodsDetail.do?product_code=" + this.product_code;
+	this.inDS = "productVO=productVO productOptionVO=productOptionVO";
+	this.outDS = "productVO=productVO productOptionVO=productOptionVO";
+	this.transaction("read", this.svcURL, this.inDS, this.outDS, "", "callback");
+};
+
+this.callback = function(obj:nexacro.Form,e:nexacro.LoadEventInfo) 
+{	
+	var imageUrl = this.productVO.getColumn(0, "images2");
+	imageUrl = encodeURI(imageUrl);
+	
+	this.ImageViewer00.set_image("http://192.168.0.12:8088/mvc2/image/uniform2/" + imageUrl);
+    this.ImageViewer00.redraw();
+    this.ImageViewer00.set_stretch("fit");
+	
+	var imageUrl2 = this.productVO.getColumn(0, "images1");
+	imageUrl2 = encodeURI(imageUrl2);
+	
+	this.ImageViewer01.set_image("http://192.168.0.12:8088/mvc2/image/uniform/" + imageUrl2);
+    this.ImageViewer01.redraw();
+    this.ImageViewer01.set_stretch("fit");
+}
+
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.product_code = nexacro.getApplication().getVariable("gproduct_code");
+	
+	nexacro.getApplication().mainframe.HFrameSet00.WorkFrame.set_formurl("Base::productUpdate.xfdl");
+};
+
+this.Button00_00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	if (confirm("삭제하시겠습니까?")) {
+		alert(this.product_code);
+        this.svcURL = "datasvc::productDel.do?product_code=" + this.product_code;
+        this.inDS = "productVO=productVO productOptionVO=productOptionVO";
+        this.outDS = "productVO=productVO productOptionVO=productOptionVO";
+        this.transaction("del", this.svcURL, this.inDS, this.outDS, "", "call");
+    } else {
+        return false;
+    }
+};
+
+this.call = function(svcid, errcode, errmsg, responseData)
+{	
+	if (svcid == "del") {
+        alert("삭제되었습니다");
+        nexacro.getApplication().mainframe.HFrameSet00.WorkFrame.set_formurl("Base::productList.xfdl");
+    } else {
+        alert("삭제를 취소합니다");
+    }
+}]]></Script>
+  </Form>
+</FDL>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <GenInfo version="1.1">
+    <Rule>
+      <ENV rule_version="1.05"/>
+      <ADL rule_version="1.14"/>
+      <FDL rule_version="1.04"/>
+      <XCSS rule_version="1.04"/>
+      <Script rule_version="1.02"/>
+      <GeneratorInfo rule_version="1.2"/>
+    </Rule>
+    <Info project="C:\Users\Gram\Documents\TOBESOFT\Nexacro N\projects\chelsea\" generated="C:\Users\Gram\Documents\TOBESOFT\Nexacro N\outputs\chelsea\">
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\typedefinition.xml" checksum="20230706161310" errormsg=""/>
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\appvariables.xml" checksum="20230627143946" errormsg=""/>
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\environment.xml" checksum="20230627143945" errormsg=""/>
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\_resource_\_theme_\blue\theme.xcss" checksum="20230627143946" errormsg=""/>
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\Application_Desktop.xadl" checksum="20230627143946" errormsg=""/>
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\FrameBase\Form_Left.xfdl" checksum="20230628140226" errormsg=""/>
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\FrameBase\Form_Work.xfdl" checksum="20230627143946" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\21.0.0\nexacrolib\framework\Framework.json" checksum="20221228172854" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\21.0.0\nexacrolib\resources\Resource.json" checksum="20221228172854" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\21.0.0\nexacrolib\component\CompBase.json" checksum="20221228172850" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\21.0.0\nexacrolib\component\ComComp.json" checksum="20221228172850" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\21.0.0\nexacrolib\component\Grid.json" checksum="20221228172852" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\21.0.0\nexacrolib\component\ListView.json" checksum="20221228172856" errormsg=""/>
+      <File url="C:\Program Files (x86)\TOBESOFT\Nexacro N\SDK\21.0.0\nexacrolib\component\DeviceAPI.json" checksum="20221228172850" errormsg=""/>
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\Base\customer.xfdl" checksum="20230629170446" errormsg=""/>
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\Base\buyList.xfdl" checksum="20230630100736" errormsg=""/>
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\Base\buyDetail.xfdl" checksum="20230628112454" errormsg=""/>
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\FrameBase\productList.xfdl" checksum="20230628112708" errormsg=""/>
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\Base\productList.xfdl" checksum="20230630100824" errormsg=""/>
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\Base\productDetail.xfdl" checksum="20230629103713" errormsg=""/>
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\Base\productUpdate.xfdl" checksum="20230629163018" errormsg=""/>
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\Base\productInsert.xfdl" checksum="20230629162853" errormsg=""/>
+      <File url="C:\Users\Gram\Documents\tobesoft\nexacro N\projects\chelsea\Base\productUpdate.xfdl" checksum="20230629134357" errormsg=""/>
+    </Info>
+  </GenInfo>
+</root>
