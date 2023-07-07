@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="BoardDao">  
+
+	<select id="boardList" parameterType="map" resultType="BoardVO">
+        SELECT SEQ,NAME,TITLE,CONTENT,PASS,HIT,REGDATE FROM (SELECT A.*, ROWNUM RNUM FROM (SELECT * FROM BOARD ORDER BY SEQ DESC)A)
+		<![CDATA[
+		WHERE RNUM >= #{start} AND RNUM <= #{end}		
+		]]>			
+	</select>
+	
+	<select id="boardCount" parameterType="map" resultType="Integer">
+		SELECT COUNT(*)	FROM BOARD 
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+

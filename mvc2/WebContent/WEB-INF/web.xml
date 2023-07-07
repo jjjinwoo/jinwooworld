@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<web-app >
+  <servlet>
+    <servlet-name>Controller</servlet-name>
+    <servlet-class>member.controller.ControllerAction</servlet-class>
+    <init-param>
+      <param-name>propertyConfig</param-name>
+      <param-value>CommandPro.properties</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Controller</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+</web-app>

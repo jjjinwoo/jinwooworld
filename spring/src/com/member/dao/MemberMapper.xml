@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="MemberDAO">  
+	
+	<!-- 회원가입 -->
+	<insert id="addMember" parameterType="com.member.VO.MemberVO">
+		INSERT INTO MEMBER(userID, pwd, name, postnum, address1, address2, phone, grade)
+		VALUES(#{userID}, #{pwd}, #{name}, #{postnum}, #{address1}, #{address2}, #{phone}, 0)
+	</insert>
+	
+	<!-- 로그인처리 -->
+	<select id="login" parameterType="com.member.VO.MemberVO" resultType="com.member.VO.MemberVO">
+		<![CDATA[
+		select * from member where userID = #{userID}
+		]]>
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id = "findUser" resultType = "String">
+		select userID from member where phone = #{phone} and name = #{name}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id = "findPwd" resultType = "String">
+		select pwd from member where name = #{name} and userID = #{userID} 
+	</select>
+	
+	<!-- 비밀번호 확인 -->
+	<select id="getMember" resultType="com.member.VO.MemberVO">
+		select pwd from member where userID = #{userID}
+	</select>
+	
+	<!-- id중복검사 -->
+	<select id="getUser" resultType="com.member.VO.MemberVO">
+		select * from member where userID = #{userID}
+	</select>
+	
+	<!-- 전화번호 중복검사 -->
+	<select id="getPhone" resultType="com.member.VO.MemberVO">
+		select * from member where phone = #{phone}
+	</select>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="memberDel" parameterType = "String">
+		delete from member where userID = #{userID}
+	</delete>
+
+	<!-- 수정하기 -->
+	<update id = "memberUpdate1">
+		update member set pwd = #{pwd}, name = #{name}, postnum = #{postnum}, address1 = #{address1}, address2 = #{address2}
+		where userID =#{userID} and phone = #{phone}
+	</update>
+	
+	<!-- 회원 목록 -->
+	<select id = "listMember" parameterType = "map" resultType = "com.member.VO.MemberVO">
+		select userID, pwd, name, postnum, address1, address2, phone FROM (
+			SELECT rownum rnum, p.* FROM (
+			SELECT * FROM member
+			<include refid="searchOracle3" />
+			) p)
+		<![CDATA[    
+	    WHERE RNUM >= #{startCount} AND RNUM <= #{endCount}
+	    ]]>
+	</select>
+	
+	
+	<!-- 관리자 삭제 -->	
+	<delete id="memberRemove" parameterType = "String">
+		delete from member where userID = #{userID}
+	</delete>
+	
+	<!-- 메인 -->
+	<select id="getProducts" parameterType="map" resultType="com.product.VO.ProductVO">
+	    SELECT product_code, product_type, product_name, product_price, deleteState, images1, images2, product_date FROM (
+	        SELECT rownum rnum, p.* FROM (
+	            SELECT * FROM product
+	            <include refid="searchOracle" />
+	            ORDER BY product_date DESC
+	        ) p)
+	    <![CDATA[
+	    	WHERE RNUM >= #{startCount} AND RNUM <= #{endCount}
+	    ]]>	
+	</select>
+	
+	<sql id="searchOracle">
+	    <where>
+	    AND DELETESTATE = 'N'
+	        <if test="keyField != null">
+	            <if test="keyField == 'product_type'">AND LOWER(product_type) LIKE LOWER('%' || #{keyWord} || '%')</if>
+	            <if test="keyField == 'product_name'">AND LOWER(product_name) LIKE LOWER('%' || #{keyWord} || '%')</if>
+	        </if>
+	    </where>
+	</sql>
+	
+	<select id="getProductCount" parameterType="map" resultType="int">
+	    SELECT COUNT(*) FROM product
+	    <include refid="searchOracle" />
+	</select>
+	
+	<select id="productDetail" resultType="com.product.VO.ProductVO">
+        SELECT *
+        FROM product
+        WHERE product_code = #{product_code}
+    </select>
+	
+	<!-- detail에서 option 가져오기 -->
+    <select id="getproductOption" resultType="com.product.VO.ProductOptionVO">
+        SELECT *
+        FROM product_option
+        WHERE product_code = #{product_code}
+    </select>
+    
+    <select id="getProductOption3" resultType="com.product.VO.ProductOptionVO">
+	    SELECT *
+	    FROM product_option
+	    WHERE product_code = #{product_code} AND product_size = #{product_size}
+	</select>
+	<insert id="addCart" parameterType="com.cart.VO.CartVO"> 
+		INSERT INTO cart(userID, phone, product_size, quantity, product_price, product_code, product_name, delivery, cartNum) 
+		VALUES(#{userID}, #{phone}, #{product_size}, #{quantity}, #{product_price}, #{product_code}, #{product_name}, '무료배송', (SELECT NVL(MAX(cartNum), 0) + 1 FROM cart WHERE userID = #{userID}))
+	</insert>
+	
+	<select id="cartList" parameterType="string" resultType="com.cart.VO.CartVO">
+	    SELECT * FROM cart WHERE userID = #{userID}
+	</select>
+	
+	<delete id= "deleteAll" parameterType = "String">
+		delete from cart where userID = #{userID}
+	</delete>
+	
+	<delete id = "deletePart">
+	    delete from cart where userID = #{userID} and cartNum = #{cartNum}
+	</delete>
+	
+	<!-- 주문결제로 넘기는 부분에서 수량 변경이 있을 경우 update -->
+	<update id="updateCart">
+	    update cart set product_size = #{product_size}, quantity = #{quantity}, product_price = #{product_price}, product_code = #{product_code}, product_name = #{product_name}
+	    where userID = #{userID} and cartNum = #{cartNum}
+	</update>
+	
+	<insert id = "insertOrderProduct" parameterType = "com.order.VO.OrderProductVO">
+	    insert into order_product(orderProduct_num, order_num, userID, phone, product_size, quantity, product_price, product_code, product_name, delivery, order_date, order_state, buyComplete, refund)
+	    VALUES(orderproduct_num_seq.nextval, #{order_num}, #{userID}, #{phone},#{product_size},#{quantity},#{product_price},#{product_code},#{product_name},#{delivery}, SYSDATE, '배송 준비중', 'N','N')
+	</insert>
+	
+	<insert id = "insertOrder" parameterType = "com.order.VO.OrderVO">
+	    insert into orders(order_num, userID, phone, order_phone, order_name, order_address1, order_address2, postnum, order_memo, paymethod, totalbill)
+	    VALUES(order_num_seq.nextval, #{userID}, #{phone}, #{order_phone}, #{order_name}, #{order_address1}, #{order_address2}, #{postnum}, #{order_memo}, #{paymethod}, #{totalbill})
+	</insert>
+	
+	<select id="selectOrderNum" resultType="int">
+	    SELECT order_num_seq.currval FROM DUAL
+	</select>
+	
+	<delete id="deleteCart" parameterType = "String">
+		delete from cart where userID = #{userID} and cartNum = #{cartNum}
+	</delete>
+	
+	<update id="updateQuantity" parameterType="ProductOptionVO">
+    update product_option
+    set quantity = #{quantity}
+    where product_code = #{product_code} and product_size = #{product_size}
+	</update>
+	
+	<!-- product_code와 product_size에 대한 재고량(quantity)을 가져오는 -->
+	<select id="getproductOption2" resultType="com.product.VO.ProductOptionVO">
+        SELECT * 
+        FROM product_option 
+        WHERE product_code = #{product_code} AND product_size = #{product_size}
+    </select>
+	
+	<select id="getProductOption4" resultType="com.product.VO.ProductOptionVO">
+	    SELECT *
+	    FROM product_option
+	    WHERE product_code = #{product_code} AND product_size = #{product_size}
+	</select>
+	
+	<select id="getCart" resultType="com.cart.VO.CartVO">
+        SELECT * FROM cart WHERE userID=#{userID} AND product_code=#{product_code} AND product_size=#{product_size}
+    </select>
+    
+    <update id="updateCart2">
+        UPDATE cart SET quantity=#{quantity} WHERE userID=#{userID} AND product_code=#{product_code} AND product_size=#{product_size}
+    </update>
+	
+	<select id="getOrder" resultType="com.order.VO.OrderVO">
+        SELECT * FROM orders WHERE userID=#{userID}
+    </select>
+	
+	<!-- 주문내역 -->
+	<select id="getBuyProduct" parameterType="map" resultType="com.order.VO.OrderProductVO">
+	    SELECT orderProduct_num, order_num, userID, phone, product_code, product_size, quantity, product_name, product_price, delivery, order_date, order_state, buyComplete, refund, images2 FROM (
+	        SELECT rownum rnum, p.* FROM (
+	            SELECT * FROM order_product
+	            <include refid="searchOracle2" />
+	            ORDER BY order_date DESC
+	        ) p)
+	    <![CDATA[    
+	    WHERE RNUM >= #{startCount} AND RNUM <= #{endCount}
+	    ]]>
+	</select>
+	
+	<sql id="searchOracle3">
+	    <where>
+	        <if test="keyField != null">
+	            <if test="keyField == 'userID'">AND LOWER(userID) LIKE LOWER('%' || #{keyWord} || '%')</if>
+	            <if test="keyField == 'name'">AND LOWER(name) LIKE LOWER('%' || #{keyWord} || '%')</if>
+	        	<if test="keyField == 'phone'">AND LOWER(phone) LIKE LOWER('%' || #{keyWord} || '%')</if>
+	        </if>
+	    </where>
+	</sql>
+	
+	<select id="listCount" parameterType="map" resultType="int">
+	    SELECT COUNT(*) FROM member
+	    <include refid="searchOracle3" />
+	</select>
+	
+	<select id="getProductCount2" parameterType="map" resultType="int">
+	    SELECT COUNT(*) FROM order_product
+	    <include refid="searchOracle2" />
+	</select>
+	
+	<sql id="searchOracle2">
+	    <where>
+	    AND userID = #{userID}
+	        <if test="keyField != null">
+	            <if test="keyField == 'product_name'">AND LOWER(product_name) LIKE LOWER('%' || #{keyWord} || '%')</if>
+	            <if test="keyField == 'order_state'">AND LOWER(order_state) LIKE LOWER('%' || #{keyWord} || '%')</if>
+	        </if>
+	    </where>
+	</sql>
+	
+	<!-- 주문 내역 상세 -->
+	<select id="getOrders" parameterType="map" resultType="com.order.VO.OrderVO">
+		SELECT *
+	    FROM orders
+	    WHERE userID = #{userID} AND order_num = #{order_num}
+	</select>
+	
+	<!-- 주문 내역 상세 -->
+	<select id="getOrderProducts" parameterType="map" resultType="com.order.VO.OrderProductVO">
+		SELECT *
+	    FROM order_product
+	    WHERE userID = #{userID} AND order_num = #{order_num}
+	</select>
+	
+	<update id="updateState" parameterType="map">
+	    UPDATE order_product
+	    SET order_state = #{order_state}
+	    WHERE userID = #{userID} AND orderProduct_num = #{orderProduct_num} AND order_num = #{order_num}
+	</update>
+	
+	<!-- buyComplete update -->
+	<update id="updateBuyComplete" parameterType="map">
+	    UPDATE order_product
+	    SET buyComplete = 'Y'
+	    WHERE userID = #{userID} AND orderProduct_num = #{orderProduct_num}
+	</update>
+	
+	<!-- 환불요청 update -->
+	<update id="updateRefundConfirm" parameterType="map">
+	    UPDATE order_product
+	    SET refund = 'Y', order_state = #{order_state}
+	    WHERE userID = #{userID} AND orderProduct_num = #{orderProduct_num}
+	</update>
+	
+	<select id="getProductCodeCurrval" resultType="int">
+	    SELECT product_code_seq.currval FROM DUAL
+	</select>
+	<!-- 상품 등록  -->
+	<insert id="productInsert" parameterType="com.product.VO.ProductVO">
+		INSERT INTO product(product_code, product_type, product_price, product_name, images1, images2, deleteState, product_date)
+		VALUES( product_code_seq.nextval, #{product_type}, #{product_price}, #{product_name}, #{images1}, #{images2}, 'N', SYSDATE)
+	</insert>
+	
+	<!-- 옵션 등록 -->
+	<insert id = "productOptionInsert" parameterType="com.product.VO.ProductOptionVO">
+		INSERT INTO product_option(product_code, product_size, quantity)
+		VALUES( product_code_seq.currval, #{product_size}, #{quantity})
+	</insert>
+	
+	<!-- 상품 수정 -->
+	<update id="productUpdate" parameterType="com.product.VO.ProductVO">
+        UPDATE product
+        SET images1 = #{images1},
+        	images2 = #{images2},
+            product_name = #{product_name},
+            product_price = #{product_price},
+            product_type = #{product_type}
+        WHERE product_code = #{product_code}
+    </update>
+	
+	<!-- 상품 옵션 수정 전에 db날리기 -->
+
+	<delete id="productOptionDelete" parameterType="int">
+	    DELETE FROM product_option
+	    WHERE product_code = #{product_code}
+	</delete>
+	    	
+	<!-- 상품 옵션 수정 -->
+	<insert id = "productOptionUpdate" parameterType="com.product.VO.ProductOptionVO">
+		INSERT INTO product_option(product_code, product_size, quantity)
+		VALUES(#{product_code}, #{product_size}, #{quantity})
+	</insert>
+
+	
+	<!-- 삭제하기 위한 deletestate update -->
+	<update id="productDelete" parameterType="com.product.VO.ProductVO">
+        UPDATE product
+        SET deleteState = #{deleteState}
+        WHERE product_code = #{product_code}
+    </update>
+	<!-- 삭제하기 위한 product_code에 해당하는 option 0개로 변경 -->
+	<update id="productOptionUpdate2" parameterType="com.product.VO.ProductOptionVO">
+        UPDATE product_option
+        SET quantity = #{quantity}
+        WHERE product_code = #{product_code} AND product_size = #{product_size}
+    </update>
+	
+	<!-- 상품 등록 전에 product_code 중복 검사 -->
+	<select id="isProductCodeExists" parameterType="String" resultType="boolean">
+        SELECT COUNT(*) FROM product WHERE product_code = #{product_code}
+    </select>
+	
+	<update id="imageUp">
+	    UPDATE product
+	    SET images2 = #{images2}
+	    WHERE product_code = #{product_code}
+	</update>
+	
+	<update id="imageUp2">
+	    UPDATE product
+	    SET images1 = #{images1}
+	    WHERE product_code = #{product_code}
+	</update>
+	
+</mapper>
